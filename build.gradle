@@ -54,7 +54,6 @@ dependencies {
     compile 'com.sun.xml.bind:jaxb-osgi:2.4.0-b180830.0438'
     compile group: 'com.sun.xml.ws', name: 'jaxws-ri', version: '2.3.1', ext: 'pom'
 
-
     testImplementation 'org.codehaus.groovy:groovy-all:2.5.6'
     testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
