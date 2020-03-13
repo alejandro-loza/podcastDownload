@@ -1,3 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.0.0"
+        classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
+        classpath 'org.kordamp.gradle:stats-gradle-plugin:0.2.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.1'
+        classpath 'net.nemerosa:versioning:2.1.0'
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+    }
+}
+
 plugins {
     id 'groovy'
     id "application"
@@ -11,7 +26,13 @@ repositories {
 }
 
 dependencies {
+    implementation "org.glassfish.jersey.core:jersey-client:2.6"
+
+    compile 'org.jsoup:jsoup:1.13.1'
     compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile group: 'org.springframework', name: 'spring-web', version: '4.3.8.RELEASE'
+
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
