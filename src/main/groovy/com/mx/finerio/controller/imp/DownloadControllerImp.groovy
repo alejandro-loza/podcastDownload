@@ -10,7 +10,6 @@ import com.mx.finerio.services.imp.DownloadServiceImp
 import com.mx.finerio.services.imp.HtmlHandlerServiceImp
 import org.apache.log4j.Logger
 
-import java.util.stream.Collectors
 import java.util.stream.Stream
 
 class DownloadControllerImp implements DownloadController {
