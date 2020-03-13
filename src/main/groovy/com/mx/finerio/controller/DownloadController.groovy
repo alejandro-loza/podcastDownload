@@ -1,8 +1,5 @@
 package com.mx.finerio.controller
 
-class DownloadController {
-
-    void download(){
-
-    }
+interface DownloadController {
+    void downloadPodcasts()
 }

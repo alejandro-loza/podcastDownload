@@ -17,7 +17,18 @@ class Podcast {
         "https:${this.url}"
     }
 
+    String getQuality(){
+        this.quality.tokenize()[1]
+    }
+
+    String getCategory(){
+        this.name.tokenize(',').first()
+    }
+
     String getFullName(){
-        this.name << ' ' <<  this.quality - 'Download '
+        this.name << ' ' <<  this.getQuality()
     }
 }
+
+
+

@@ -8,6 +8,8 @@ doc/
 .gradle/
 /bin/
 target/
+/files/
+/logs/
  
 # OS Files #
 .DS_Store

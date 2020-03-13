@@ -53,6 +53,7 @@ dependencies {
     compile group: 'javax.xml.ws', name: 'jaxws-api', version: '2.3.1'
     compile 'com.sun.xml.bind:jaxb-osgi:2.4.0-b180830.0438'
     compile group: 'com.sun.xml.ws', name: 'jaxws-ri', version: '2.3.1', ext: 'pom'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
     testImplementation 'org.codehaus.groovy:groovy-all:2.5.6'
     testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
@@ -61,6 +62,8 @@ dependencies {
 
     api group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.1'
     api group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.1'
+
+
     api 'log4j:log4j:1.2.16'
 
     testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
@@ -68,6 +71,7 @@ dependencies {
     testCompile "org.mock-server:mockserver-client-java:3.10.8"
 
     compile 'org.jsoup:jsoup:1.13.1'
+    implementation 'junit:junit:4.12'
 
 
 }

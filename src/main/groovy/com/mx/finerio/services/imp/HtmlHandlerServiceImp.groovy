@@ -8,20 +8,20 @@ import org.jsoup.HttpStatusException
 
 class HtmlHandlerServiceImp implements HtmlHandlerService {
 
-    public static final String BBC_PODCAST_URL = 'https://www.bbc.co.uk/programmes/p086934c/episodes/downloadsX'
+    public static final String BBC_PODCAST_URL = 'https://www.bbc.co.uk/programmes/p086934c/episodes/downloads'
     public static final String CLASS = 'link-complex popup__list__item island--squashed br-subtle-bg-ontext br-subtle-bg-onbg--hover br-subtle-link-ontext--hover'
-    private static Logger log = Logger.getLogger(HtmlHandlerServiceImp.class);
+    private static Logger log = Logger.getLogger(HtmlHandlerServiceImp.class)
 
     JsoupService jsoupService = new JsoupServiceImp()
 
     @Override
-    List<Podcast> downloadHtmlPage() {
+    List<Podcast> podcastFromHtml() {
         List<Podcast> podcast = []
         try{
             podcast = jsoupService.getHtmlPage(BBC_PODCAST_URL)
                     .getElementsByClass(CLASS).collect({ it -> new Podcast(it) })
         }catch(HttpStatusException e){
-            log.info( 'Can not download podcast: ' << e.message)
+            log.error( 'Can not download podcast: ' << e.message)
         }
         podcast
     }

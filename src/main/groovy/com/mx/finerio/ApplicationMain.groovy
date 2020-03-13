@@ -1,11 +1,11 @@
 package com.mx.finerio
 
-import com.mx.finerio.services.HtmlHandlerService
-import com.mx.finerio.services.imp.HtmlHandlerServiceImp
+import com.mx.finerio.controller.DownloadController
+import com.mx.finerio.controller.imp.DownloadControllerImp
 
 class ApplicationMain {
     static void main(String[] args) {
-        HtmlHandlerService html = new HtmlHandlerServiceImp()
-        html.downloadHtmlPage().each {println(it.getFullName())}
+        DownloadController downloadService = new DownloadControllerImp()
+        downloadService.downloadPodcasts()
     }
 }
