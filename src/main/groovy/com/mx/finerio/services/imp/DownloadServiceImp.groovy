@@ -8,15 +8,15 @@ import org.apache.log4j.Logger
 class DownloadServiceImp implements DownloadService {
     private static Logger log = Logger.getLogger(DownloadServiceImp.class)
     @Override
-    void tryDownload(Podcast it) {
+    void tryDownload(Podcast podcast) {
         try {
-            log.info("Downloading: ${it.getFullName()}")
+            log.info("Downloading: ${podcast.getFullName()}")
             FileUtils.copyURLToFile(
-                    new URL(it.url),
-                    new File("files/${it.getCategory()}/${it.getQuality()}/${it.name}")
+                    new URL(podcast.url),
+                    new File("files/${podcast.getCategory()}/${podcast.getQuality()}/${podcast.name}")
             )
         }catch(IOException e){
-            log.error("Can not download file ${it.name} stachktrace: ${e.message}")
+            log.error("Can not download file ${podcast.name} stachktrace: ${e.message}")
         }
     }
 }

@@ -1,5 +1,5 @@
 package com.mx.finerio.controller
 
 interface DownloadController {
-    void downloadPodcasts()
+    void downloadPodcasts(String[] args)
 }

@@ -1,4 +1,4 @@
-package com.mx.finerio.serivices
+package com.mx.finerio.controller
 
 import com.mx.finerio.dtos.Podcast
 import com.mx.finerio.controller.DownloadController
@@ -26,21 +26,24 @@ class DownloadControllerSpec extends Specification{
         Podcast podcast = new Podcast(element)
         Podcast podcast1 = new Podcast(element)
 
+        and:
+        String[] args = []
+
        when:
-       downloadController.downloadPodcasts()
+       downloadController.downloadPodcasts(args)
 
        then:
-       1 * downloadController.handlerService.podcastFromHtml() >> [podcast, podcast1]
+       1 * downloadController.handlerService.podcastFromHtml(_ as String) >> [podcast, podcast1]
        2 * downloadController.downloadService.tryDownload(_ as Podcast)
 
     }
 
     def "Should not download  on empty"() {
         when:
-        downloadController.downloadPodcasts()
+        downloadController.downloadPodcasts(_ as String[])
 
         then:
-        1 * downloadController.handlerService.podcastFromHtml() >> []
+        1 * downloadController.handlerService.podcastFromHtml(_ as String) >> []
         0 * downloadController.downloadService.tryDownload(_ as Podcast)
 
     }

@@ -18,7 +18,7 @@ class HtmlHandlerServiceSpec  extends Specification{
 
     def "Should return an podcast list "() {
        when:'download html page'
-       def response = handlerService.podcastFromHtml()
+       def response = handlerService.podcastFromHtml(_ as String)
 
        then:
        1 * handlerService.jsoupService.getHtmlPage(_ as String) >> new TestUtils().buildHtmlDocument()
