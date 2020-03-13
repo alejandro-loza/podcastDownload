@@ -62,6 +62,8 @@ http://localhost:63342/podcastDownloader/build/reports/tests/test/index.html
 ```
 O en su defecto podrás encontrar el archivo html en podcastDownloader/build/jacocoHtml/index.html
 
+###Archivos
+Estos los podras visualizar en la carpeta files dentro del proyecto
 
 License
 ----
