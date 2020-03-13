@@ -18,6 +18,6 @@ class Podcast {
     }
 
     String getFullName(){
-        this.name << this.quality - 'Download '
+        this.name << ' ' <<  this.quality - 'Download '
     }
 }
