@@ -23,6 +23,7 @@ class HtmlHandlerServiceSpec  extends Specification{
 
        then:
        1 * handlerService.jsoupService.getHtmlPage(_ as String) >> buildHtmlDocument()
+       assert !response
        assert response instanceof List<Podcast>
     }
 
