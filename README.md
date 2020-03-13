@@ -26,23 +26,7 @@ $ cd podcastDownloader
 $ ./gradlew clean run   
 ```
 Este comando descargarà todos los podcast incluidos en https://www.bbc.co.uk/programmes/p086934c/episodes/downloads
-###Custom podcast
-Es posible descargar mas podcast de otras categorias pero deberá proveer el path a descargar por ejemplo
-del siguiente url https://www.bbc.co.uk/programmes/p06kyljg/episodes/downloads?page=2 deberas proverr el comando de la siguiente manera:
-```sh 
-./gradlew run --args='p06kyljg/episodes/downloads?page=2 ' 
-```
 
-También es posible filtrar por el tipo de calidad deseada esto descargara en Higher o Lower para descargar en calidad alta
-deberá correr el comando de la siguiente manera.
-```sh 
-./gradlew run --args='p06kyljg/episodes/downloads?page=2 Higher'
-
-```
-Para calidad baja deberá correr:
-```sh 
-./gradlew run --args='p06kyljg/episodes/downloads?page=2 Lower' 
-```
 ###Correr los test
 
 ```sh
@@ -63,7 +47,7 @@ http://localhost:63342/podcastDownloader/build/reports/tests/test/index.html
 O en su defecto podrás encontrar el archivo html en podcastDownloader/build/jacocoHtml/index.html
 
 ###Archivos
-Estos los podras visualizar en la carpeta files dentro del proyecto
+Etos los podras visualizar en la carpeta files dentro del proyecto
 
 License
 ----
