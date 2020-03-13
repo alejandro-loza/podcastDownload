@@ -1,0 +1,87 @@
+configurations {
+  provided
+}
+
+task sourcesJar(type: Jar) {
+  group 'Build'
+  description 'An archive of the source code'
+  classifier 'sources'
+  from sourceSets.main.allSource
+}
+
+def pomConfig = {
+  name project.name
+  description project.project_description
+  url project.project_url
+  inceptionYear '2019'
+  licenses {
+    license([:]) {
+      name 'The Apache Software License, Version 2.0'
+      url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+      distribution 'repo'
+    }
+  }
+  scm {
+    url project.project_scm
+  }
+  developers {
+    [
+        neo : 'Diego Zarate'
+    ].each { devId, devName ->
+      developer {
+        id devId
+        name devName
+        roles {
+          role 'Developer'
+        }
+      }
+    }
+  }
+}
+
+sourceSets {
+  main {
+    compileClasspath += configurations.provided
+  }
+  test {
+    compileClasspath += configurations.provided
+    runtimeClasspath += configurations.provided
+  }
+}
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+      artifact sourcesJar
+
+      pom.withXml {
+        asNode().children().last() + pomConfig
+      }
+    }
+  }
+}
+
+artifactory {
+  contextUrl = 'https://developers.kubofinanciero.com/artifactory'
+  publish {
+    repository {
+      repoKey = 'erp'
+      username = "scripting"
+      password = "usHoRypoNToRKEtRECtIONIPYRthun"
+    }
+    defaults {
+      publications('mavenJava')
+      publishArtifacts = true
+      properties = ['qa.level': 'basic', 'dev.team' : 'core']
+      publishPom = true
+      properties {                                                   //Optional closure to attach properties to artifacts based on a list of artifact patterns per project publication
+        mavenJava 'org.jfrog:*:*:*@*', key1: 'val1'                //The property key1=val1 will be set on all artifacts part of the mavenJava publication and with group org.jfrog
+        all 'org.jfrog:shared:1.?:*@*', key2: 'val2', key3: 'val3' //The properties key2 and key3 will be set on all published artifacts (all publications) with group:artifact:version
+      }
+    }
+  }
+  resolve {
+    repoKey = 'jcenter'
+  }
+}

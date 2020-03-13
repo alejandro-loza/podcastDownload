@@ -14,27 +14,87 @@ buildscript {
 }
 
 plugins {
+    id 'java-library'
     id 'groovy'
-    id "application"
+    id 'jacoco'
+    id 'application'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'podcastDownloader'
+version '0.0.1-SNAPSHOT'
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'org.kordamp.gradle.stats'
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: "com.jfrog.artifactory"
+apply plugin: 'maven-publish'
+apply plugin: 'net.nemerosa.versioning'
+apply from: 'gradle/code-coverage.gradle'
+apply from: './publishing.gradle'
 
 repositories {
-    mavenCentral()
+    jcenter()
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
+}
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 dependencies {
-    implementation "org.glassfish.jersey.core:jersey-client:2.6"
 
-    compile 'org.jsoup:jsoup:1.13.1'
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
     compile group: 'org.springframework', name: 'spring-web', version: '4.3.8.RELEASE'
 
+    implementation 'javax.activation:activation:1.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "org.codehaus.groovy:groovy-all:2.4.15"
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'javax.xml.ws', name: 'jaxws-api', version: '2.3.1'
+    compile 'com.sun.xml.bind:jaxb-osgi:2.4.0-b180830.0438'
+    compile group: 'com.sun.xml.ws', name: 'jaxws-ri', version: '2.3.1', ext: 'pom'
+
+
+    testImplementation 'org.codehaus.groovy:groovy-all:2.5.6'
+    testImplementation 'org.spockframework:spock-core:1.2-groovy-2.5'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+    testImplementation 'net.bytebuddy:byte-buddy:1.9.12'
+
+    api group: 'org.springframework', name: 'spring-core', version: '4+'
+    api group: 'org.springframework', name: 'spring-context', version: '4+'
+    api group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.1'
+    api group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.1'
+    api 'log4j:log4j:1.2.16'
+
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.23.RELEASE'
+    testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+    testCompile "org.spockframework:spock-spring:1.1-groovy-2.4"
+    testCompile "org.mock-server:mockserver-netty:3.10.8"
+    testCompile "org.mock-server:mockserver-client-java:3.10.8"
+
+    compile 'org.jsoup:jsoup:1.13.1'
+
+
 }
+
+jacoco {
+    toolVersion = "0.8.3"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+test.finalizedBy jacocoTestReport
+
+jar.finalizedBy sourcesJar, shadowJar
 
 ext {
     mainClass = "com.mx.finerio.ApplicationMain"
